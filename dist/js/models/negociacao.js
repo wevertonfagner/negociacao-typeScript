@@ -1,19 +1,3 @@
-/*
-    Poderia ser assim:
-
-    export class Negociacao {
-
-    constructor(
-        private readonly data: Date,
-        public readonly quantidade: number,
-        public readonly valor: number
-        ) {}
-
-    get volume(): number {
-        return this._quantidade * this._valor
-    }
-}
-*/
 export class Negociacao {
     constructor(data, quantidade, valor) {
         this._data = data;
@@ -32,5 +16,12 @@ export class Negociacao {
     }
     get volume() {
         return this._quantidade * this._valor;
+    }
+    static criaDe(dataString, quantidadeString, valorString) {
+        const exp = /-/g;
+        const date = new Date(dataString.replace(exp, ','));
+        const quantidade = parseInt(quantidadeString);
+        const valor = parseFloat(valorString);
+        return new Negociacao(date, quantidade, valor);
     }
 }
